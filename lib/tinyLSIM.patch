@@ -1,0 +1,18 @@
+diff --git a/Source/PerceptualSimilarity/util/util.py b/Source/PerceptualSimilarity/util/util.py
+index 66f5fe2..2094495 100644
+--- a/Source/PerceptualSimilarity/util/util.py
++++ b/Source/PerceptualSimilarity/util/util.py
+@@ -9,7 +9,12 @@ import os
+ import collections
+ import matplotlib.pyplot as plt
+ from scipy.ndimage.interpolation import zoom
+-from skimage.measure import compare_ssim
++try:
++    from skimage.measure import compare_ssim # for skimage.version < 0.17
++except ImportError:
++    from skimage.metrics import structural_similarity as compare_ssim # for skimage.version >= 0.17
++    pass
++
+ import torch
+ from IPython import embed
+ #import cv2
